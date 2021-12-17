@@ -1,6 +1,7 @@
 package br.com.api.avalicao4.services;
 
 import br.com.api.avalicao4.exceptions.ProductAlreadyExistsException;
+import br.com.api.avalicao4.exceptions.ProductNotFoundException;
 import br.com.api.avalicao4.models.Produto;
 import br.com.api.avalicao4.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +45,19 @@ public class ProdutoService {
 
     public Produto findById(Long id) {
         Optional<Produto> result = repository.findById(id);
-        return result.orElseThrow(() -> new ProductAlreadyExistsException("Produto não encontrado. Porfavor tente novamente."));
+        return result.orElseThrow(() -> new ProductNotFoundException("Produto não encontrado. Porfavor tente novamente."));
     }
 
     public Produto findByNome(String nome) {
         Optional<Produto> result = repository.findByNome(nome);
-        return result.orElseThrow(() -> new ProductAlreadyExistsException("Produto não encontrado. Porfavor tente novamente."));
+        return result.orElseThrow(() -> new ProductNotFoundException("Produto não encontrado. Porfavor tente novamente."));
     }
 
     public void deleteById(Long id){
         repository.delete(findById(id));
     }
 
-    public Produto edit(Long id, Produto update){
+    public Produto update(Long id, Produto update){
         Produto updated = findById(id);
 
         updated.setNome(update.getNome());

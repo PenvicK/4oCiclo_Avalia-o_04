@@ -23,12 +23,12 @@ public class Produto {
     private Double precoVenda;
     private Double precoCompra;
 
-    @JsonManagedReference
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTipoProduto")
     private TipoProduto tipoProdutos;
 
-    @JsonManagedReference
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idFornecedores")
     private Fornecedor fornecedores;
@@ -40,6 +40,8 @@ public class Produto {
         quantidadeEmEstoque = entity.getQuantidadeEmEstoque();
         precoVenda = entity.getPrecoVenda();
         precoCompra = entity.getPrecoCompra();
+        tipoProdutos = entity.getTipoProdutos();
+        fornecedores = entity.getFornecedores();
     }
 
 }
